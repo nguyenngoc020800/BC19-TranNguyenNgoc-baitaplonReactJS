@@ -1,3 +1,4 @@
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./modules/Home/pages/Home";
 import Register from "./modules/Authentication/pages/Register";
@@ -12,6 +13,7 @@ import AdminRoute from "./router/AdminRoute";
 function App() {
   return (
     <>
+      <h1>abc</h1>
       <Routes>
         <Route
           path="/admin"
