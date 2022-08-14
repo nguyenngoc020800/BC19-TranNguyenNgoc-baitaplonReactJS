@@ -11,9 +11,11 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainLayoutAdmin() {
+  const navigate = useNavigate();
   const drawerWidth = 240
   return <>
     <Box sx={{ display: "flex" }}>
@@ -46,9 +48,9 @@ export default function MainLayoutAdmin() {
         </Toolbar>
         <Divider />
         <List>
-          {["Movies", "Users"].map((text, index) => (
+          {["movies", "users"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={()=>{navigate(`/admin/${text}`)}}>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>

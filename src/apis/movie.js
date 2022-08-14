@@ -18,3 +18,11 @@ export const getMovieDeTails = (movieID) => {
 export const getBanner = () => {
   return axiosClient.get("QuanLyPhim/LayDanhSachBanner");
 };
+
+export const getMovieShowTime = (movieID) => {
+  return axiosClient.get("QuanLyRap/LayThongTinLichChieuPhim", {
+    params: {
+      maPhim: movieID,
+    },
+  });
+};

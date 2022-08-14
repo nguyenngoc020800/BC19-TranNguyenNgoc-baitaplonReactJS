@@ -1,11 +1,17 @@
 import React from "react";
+import Slider from "react-slick";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getBanners } from "../slide/bannerSlice";
-import Carousel from "react-bootstrap/Carousel";
-import CarouselItem from "react-bootstrap/esm/CarouselItem";
 import style from "../styles/banner.module.css";
 const BannerComponent = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   const dispatch = useDispatch();
   const { data, isLoading, error } = useSelector((state) => state.banner);
   useEffect(() => {
@@ -19,8 +25,17 @@ const BannerComponent = () => {
     return <h1>{error}</h1>;
   }
   return (
-    <>
-      <Carousel fade>
+    <div className="mt-5">
+      <Slider {...settings}>
+        {data.map((banner) => {
+          return (
+            <div key={banner.maBanner} className={`${style.banner__img} `}>
+              <img src={banner.hinhAnh} alt="" />
+            </div>
+          );
+        })}
+      </Slider>
+      {/* <Carousel fade>
         {data.map((banner) => {
           return (
             <CarouselItem>
@@ -30,8 +45,8 @@ const BannerComponent = () => {
             </CarouselItem>
           );
         })}
-      </Carousel>
-    </>
+      </Carousel> */}
+    </div>
   );
 };
 

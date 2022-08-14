@@ -23,6 +23,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     deletelError: (state) => state.error === null,
+    logOut: (state) => {
+      localStorage.setItem("user", JSON.stringify(null));
+      return { ...state, user: null };
+    },
   },
   extraReducers: {
     [login.pending]: (state) => {
