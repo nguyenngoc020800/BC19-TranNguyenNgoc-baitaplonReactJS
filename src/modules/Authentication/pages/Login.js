@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { login, register } from "../slices/authSlice";
-import { Navigate } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { login } from "../slices/authSlice";
+import { useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isLoading, error } = useSelector((state) => state.auth);
   const {
@@ -24,23 +25,24 @@ const Login = () => {
     dispatch(login(values));
   };
   const onError = (value) => {
-    console.log(value.matKhau);
+    console.log("đăng nhập không thành công ");
   };
   if (user) {
-    if (user.maLoaiNguoiDung === "QuanTri") {
-      return <Navigate to="/admin/movies" />;
-    }
-    return <Navigate to="/" />;
+    navigate("/");
+    return;
   }
   return (
     <div>
-      <form action="" onSubmit={handleSubmit(onSubmit, onError)}>
+      {error && <p className="text-danger">{error}</p>}
+      <h2 className="text-center">Log in</h2>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div>
           {/* <label htmlFor=""> tài khoản </label> */}
           <br />
           <TextField
             label="Tài Khoản"
             type="text"
+            sx={{ width: "100%", marginBottom: "20px" }}
             {...register("taiKhoan", {
               required: {
                 value: true,
@@ -66,6 +68,7 @@ const Login = () => {
           <TextField
             type="password"
             label="matKhau"
+            sx={{ width: "100%" }}
             {...register("matKhau", {
               required: {
                 value: true,
@@ -82,11 +85,22 @@ const Login = () => {
           {/* {errors.matKhau && <span>{errors.matKhau.message}</span>} */}
         </div>
         <br />
-        <Button type="submit" variant="contained" disabled={isLoading}>
+        <button
+          className="btn btn-success w-100"
+          type="submit"
+          disabled={isLoading}
+        >
           đăng nhập
-        </Button>
-        {error && <p>{error}</p>}
+        </button>
       </form>
+      <button
+        className="btn btn-outline-primary w-100 mt-3"
+        onClick={() => {
+          navigate("/auth/register");
+        }}
+      >
+        go to register
+      </button>
     </div>
   );
 };

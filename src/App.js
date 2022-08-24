@@ -15,6 +15,7 @@ import MovieBookingTicket from "./modules/Movie/pages/MovieBookingTicket";
 import UserList from "./modules/AdminUser/pages/UserList";
 import AddUser from "./modules/AdminUser/pages/AddUser";
 import UpdateUser from "./modules/AdminUser/pages/UpdateUser";
+import AuthenLayout from "./layout/MainLayoutAuth";
 function App() {
   return (
     <>
@@ -40,9 +41,10 @@ function App() {
           <Route path="/movie/:movieID" element={<MovieDetails />} />
           <Route path="/ticketroom/:ID" element={<MovieBookingTicket />} />
         </Route>
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/auth" element={<AuthenLayout />}>
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+        </Route>
 
         <Route path="/not-found" element={<div> not found</div>} />
       </Routes>

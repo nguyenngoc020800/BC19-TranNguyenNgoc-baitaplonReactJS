@@ -49,18 +49,20 @@ const Register = () => {
     dispatch(registerAction(value)).then((value) => {
       console.log(value.error);
       if (!value.error) {
-        navigate("/login");
+        navigate("/auth/login");
         dispatch({ type: "auth/deletelError" });
       }
       // console.log(value);
+      return;
     });
   };
   return (
     <div>
-      <h1>Register</h1>
+      {error && <p>{error}</p>}
+      <h1 className="text-center">Register</h1>
 
       <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className="mb-3 w-100">
           {/* <label htmlFor="">tài khoản</label>
           <br />
           <input type="text" {...register("taiKhoan")} />
@@ -71,9 +73,10 @@ const Register = () => {
             label="Tài Khoản"
             error={!!errors.taiKhoan}
             helperText={errors.taiKhoan?.message}
+            sx={{ width: "100%" }}
           />
         </div>
-        <div>
+        <div className="mb-3 w-100">
           {/* <label htmlFor="">mật khẩu</label>
           <br />
           <input type="password" {...register("matKhau")} />
@@ -85,14 +88,16 @@ const Register = () => {
             label="mật Khẩu"
             error={!!errors.matKhau}
             helperText={errors.matKhau?.message}
+            sx={{ width: "100%" }}
           />
         </div>
-        <div>
+        <div className="mb-3 w-100">
           {/* <label htmlFor="">họ và tên</label>
           <br />
           <input type="text" {...register("hoTen")} />
           {errors.hoTen && <span>{errors.hoTen.message}</span>} */}
           <TextField
+            sx={{ width: "100%" }}
             {...register("hoTen")}
             variant="outlined"
             label="Họ và Tên"
@@ -100,12 +105,13 @@ const Register = () => {
             helperText={errors.hoTen?.message}
           />
         </div>
-        <div>
+        <div className="mb-3 w-100">
           {/* <label htmlFor="">email</label>
           <br />
           <input type="email" {...register("email")} />
           {errors.email && <span>{errors.email.message}</span>} */}
           <TextField
+            sx={{ width: "100%" }}
             {...register("email")}
             variant="outlined"
             label="Email"
@@ -113,12 +119,13 @@ const Register = () => {
             helperText={errors.email?.message}
           />
         </div>
-        <div>
+        <div className="mb-3 w-100">
           {/* <label htmlFor=""> số điện thoại </label>
           <br />
           <input type="text" {...register("soDt")} />
           {errors.soDt && <span>{errors.soDt.message}</span>} */}
           <TextField
+            sx={{ width: "100%" }}
             {...register("soDt")}
             variant="outlined"
             label="số điện thoại"
@@ -127,11 +134,18 @@ const Register = () => {
           />
         </div>
         <br />
-        <Button type="submit" variant="contained" color="primary">
+        <button type="submit" className="btn btn-success w-100">
           dang ky
-        </Button>
-        {error && <p>{error}</p>}
+        </button>
       </form>
+      <button
+        className="mt-3 btn btn-primary w-100"
+        onClick={() => {
+          navigate("/auth/login");
+        }}
+      >
+        go to login
+      </button>
     </div>
   );
 };

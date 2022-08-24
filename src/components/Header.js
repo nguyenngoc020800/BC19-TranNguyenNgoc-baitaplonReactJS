@@ -96,7 +96,7 @@ const Header = () => {
             <button
               className="btn btn-primary"
               onClick={() => {
-                navigate(`/login`);
+                navigate(`/auth/login`);
               }}
             >
               Login
@@ -106,7 +106,7 @@ const Header = () => {
             <button
               className="btn btn-success"
               onClick={() => {
-                navigate(`/register`);
+                navigate(`/auth/register`);
               }}
             >
               Register
